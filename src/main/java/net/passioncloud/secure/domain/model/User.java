@@ -7,7 +7,7 @@ import org.springframework.data.annotation.CreatedBy;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedBy;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.stereotype.Indexed;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
@@ -19,7 +19,7 @@ import java.util.Set;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class User {
+public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
@@ -38,7 +38,26 @@ public class User {
     private String email;
     private String password;
 
-    private Set<?> authorities = new HashSet<>();
+    @OneToMany
+    private Set<Role> authorities = new HashSet<>();
 
+    // implement UserDetails
 
+    @Override
+    public String getUsername() {
+        return this.email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return false;
+    }
+    @Override
+    public boolean isAccountNonLocked() { return false; }
+
+    @Override
+    public boolean isCredentialsNonExpired() { return false; }
+
+    @Override
+    public boolean isEnabled() { return true; }
 }
