@@ -1,0 +1,15 @@
+// This file was generated using below command:
+// -nodes is short for no DES which means dont encrypt with passphrase.
+openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -sha256 -days 365 -nodes
+
+
+// passphrase is: secure
+// Below are the rest of the details
+-----
+Country Name (2 letter code) []:UG
+State or Province Name (full name) []:Kampala
+Locality Name (eg, city) []:Kampala
+Organization Name (eg, company) []:passioncloud
+Organizational Unit Name (eg, section) []:IT
+Common Name (eg, fully qualified host name) []:passioncloud.net
+Email Address []:gssenyonjo@gmail.com
